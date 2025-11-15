@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://tkkyb1qaf4dh"]
+
+[ext_resource type="Script" uid="uid://r8ti22lb8sfl" path="res://scenes/hud/hud.gd" id="1_cgeww"]
+[ext_resource type="Texture2D" uid="uid://bhnj6db1ek8it" path="res://assets/images/objects/collectibles/5.png" id="2_cgeww"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgeww"]
+radius = 13.038404
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_cgeww")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 35.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.5
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="Time" type="Label" parent="Control/MarginContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("2_cgeww")
+expand_mode = 3
+
+[node name="CollectibleArea" type="Area2D" parent="Control/MarginContainer/HSplitContainer/TextureRect"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/MarginContainer/HSplitContainer/TextureRect/CollectibleArea"]
+position = Vector2(13, 15.5)
+shape = SubResource("CircleShape2D_cgeww")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/HSplitContainer"]
+layout_mode = 2
+text = "x 10"
+
+[connection signal="area_entered" from="Control/MarginContainer/HSplitContainer/TextureRect/CollectibleArea" to="." method="_on_collectible_area_area_entered"]
+[connection signal="body_entered" from="Control/MarginContainer/HSplitContainer/TextureRect/CollectibleArea" to="." method="_on_collectible_area_body_entered"]

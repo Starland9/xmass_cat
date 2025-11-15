@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://byr8lyj3aosr7"]
+
+[ext_resource type="Script" uid="uid://cu7vywpwp2gle" path="res://scenes/tilemap/tile_map_layer.gd" id="2_yqdiy"]
+
+[node name="TileMapGen" type="Node2D"]
+script = ExtResource("2_yqdiy")
+
+[node name="Floors" type="Node2D" parent="."]

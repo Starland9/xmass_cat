@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddk3xk7amgq3e"]
+
+[ext_resource type="PackedScene" uid="uid://coi7v6u1ej205" path="res://characters/cat/cat.tscn" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://c1ucyupalcpqe" path="res://scenes/main/main.gd" id="1_ow5a4"]
+[ext_resource type="PackedScene" uid="uid://tkkyb1qaf4dh" path="res://scenes/hud/hud.tscn" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://tjuf6w1jlpe7" path="res://assets/images/objects/collectibles/world/Background/Hills.png" id="2_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://byr8lyj3aosr7" path="res://scenes/tilemap/tile_map_layer.tscn" id="3_6q06x"]
+[ext_resource type="Texture2D" uid="uid://cje05iojrevlg" path="res://assets/images/objects/collectibles/world/Background/Background.jpg" id="3_k2fmo"]
+[ext_resource type="AudioStream" uid="uid://byrjun0gqkjsr" path="res://assets/audio/2. Jolly Beats.wav" id="7_hujxm"]
+[ext_resource type="AudioStream" uid="uid://b6e8sfcf6qjlu" path="res://assets/audio/sfx/coin.wav" id="8_yyfjg"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ow5a4")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Sky" type="Parallax2D" parent="World"]
+scroll_scale = Vector2(0.1, 0)
+repeat_size = Vector2(640, 0)
+
+[node name="Sky" type="Sprite2D" parent="World/Sky"]
+scale = Vector2(0.8075, 0.36099997)
+texture = ExtResource("3_k2fmo")
+centered = false
+
+[node name="Hills" type="Parallax2D" parent="World"]
+scroll_scale = Vector2(0.4, 0)
+repeat_size = Vector2(600, 0)
+repeat_times = 2
+
+[node name="Hills" type="Sprite2D" parent="World/Hills"]
+scale = Vector2(0.6645757, 0.6645757)
+texture = ExtResource("2_l3cfh")
+centered = false
+
+[node name="TileMap" parent="." instance=ExtResource("3_6q06x")]
+
+[node name="Cat" parent="." instance=ExtResource("1_hyk8p")]
+position = Vector2(161, 165)
+
+[node name="Camera2D" type="Camera2D" parent="Cat"]
+position = Vector2(300, 0)
+process_callback = 0
+limit_left = 0
+limit_top = 0
+limit_bottom = 360
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+editor_draw_drag_margin = true
+
+[node name="HUD" parent="." instance=ExtResource("2_iuonh")]
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_hujxm")
+autoplay = true
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PickedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_yyfjg")
+
+[connection signal="die" from="Cat" to="." method="_on_cat_die"]
+[connection signal="picked_collectible" from="Cat" to="." method="_on_cat_picked_collectible"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
