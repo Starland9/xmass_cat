@@ -125,3 +125,5 @@ Projet personnel - Starland9
 ## 🤝 Contribution
 
 Pour les développeurs IA et contributeurs, consultez `.github/copilot-instructions.md` pour les détails architecturaux et conventions du projet.
+
+Pour proposer/choisir des features, voir la checklist d'idées: [docs/IDEAS.md](docs/IDEAS.md)
