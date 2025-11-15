@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs8aq3ok65u20"]
+
+[ext_resource type="Texture2D" uid="uid://bvntj2sok1adg" path="res://assets/images/wallpapers/banner.svg" id="1_5q1ba"]
+[ext_resource type="Script" uid="uid://c64wwmp40u8cc" path="res://scenes/home/home.gd" id="1_uqaih"]
+[ext_resource type="AudioStream" uid="uid://byrjun0gqkjsr" path="res://assets/audio/2. Jolly Beats.wav" id="2_ng36q"]
+
+[sub_resource type="Animation" id="Animation_uqaih"]
+resource_name = "tap_to_play_zoom"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/TapToPlay:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="Animation" id="Animation_vut6t"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/TapToPlay:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(16, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jjk6"]
+_data = {
+&"RESET": SubResource("Animation_vut6t"),
+&"tap_to_play_zoom": SubResource("Animation_uqaih")
+}
+
+[node name="Home" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uqaih")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5q1ba")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 95.0
+offset_right = 324.0
+offset_bottom = 159.0
+theme_override_font_sizes/font_size = 64
+text = "XMass Cat"
+
+[node name="TapToPlay" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 226.0
+offset_right = 326.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 16
+text = "Tap To Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ng36q")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4jjk6")
+}
+autoplay = "tap_to_play_zoom"
+playback_auto_capture_transition_type = 1
+playback_auto_capture_ease_type = 2
+speed_scale = 0.8

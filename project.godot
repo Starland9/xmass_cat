@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Xmass Cat"
-run/main_scene="uid://ddk3xk7amgq3e"
+run/main_scene="uid://bs8aq3ok65u20"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

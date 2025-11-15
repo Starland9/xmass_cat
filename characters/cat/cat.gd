@@ -43,7 +43,6 @@ func _run():
 	velocity.x = _run_speed * _speed_factor
 
 func _manage_inputs():
-	_jump()
 	if Input.is_action_just_pressed("jump"):
 		_jump()
 	
@@ -54,7 +53,7 @@ func _jump():
 	if is_on_floor():
 		jump_sound.play()
 		velocity.y -= _jump_force * jump_factor
-		_speed_factor += .5
+		_speed_factor += .1
 	
 		
 func _die():

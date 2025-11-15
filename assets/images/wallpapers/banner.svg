@@ -1,0 +1,43 @@
+<svg width="1024" height="512" viewBox="0 0 1024 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1b3a"/>
+      <stop offset="100%" stop-color="#173b6c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="512" fill="url(#g)"/>
+  <!-- Neige au sol -->
+  <ellipse cx="512" cy="460" rx="560" ry="120" fill="#ffffff" opacity="0.95"/>
+  <!-- Flocons simples -->
+  <g fill="#ffffff" opacity="0.9">
+    <circle cx="120" cy="80" r="3"/>
+    <circle cx="300" cy="60" r="2"/>
+    <circle cx="500" cy="90" r="3"/>
+    <circle cx="700" cy="50" r="2"/>
+    <circle cx="900" cy="95" r="3"/>
+    <circle cx="200" cy="160" r="2"/>
+    <circle cx="420" cy="140" r="3"/>
+    <circle cx="820" cy="150" r="2"/>
+  </g>
+  <!-- Titre -->
+  <text x="64" y="220" font-family="'DejaVu Sans', Arial, sans-serif" font-size="88" fill="#ffffff" font-weight="700">
+    Xmass Cat
+  </text>
+  <text x="64" y="270" font-family="'DejaVu Sans', Arial, sans-serif" font-size="28" fill="#d9eeff" opacity="0.9">
+    Endless runner Godot 4.5
+  </text>
+  <!-- Chat minimaliste -->
+  <g transform="translate(760,270)">
+    <circle cx="0" cy="0" r="36" fill="#22262e"/>
+    <polygon points="-28,-24 -12,-48 -8,-16" fill="#22262e"/>
+    <polygon points="28,-24 12,-48 8,-16" fill="#22262e"/>
+    <circle cx="-12" cy="-2" r="4" fill="#ffffff"/>
+    <circle cx="12" cy="-2" r="4" fill="#ffffff"/>
+    <rect x="-8" y="12" width="16" height="4" rx="2" fill="#ffffff" opacity="0.9"/>
+  </g>
+  <!-- Badge repo -->
+  <rect x="64" y="320" rx="8" ry="8" width="460" height="56" fill="#0e2b52" opacity="0.8"/>
+  <text x="84" y="357" font-family="'DejaVu Sans', Arial, sans-serif" font-size="22" fill="#cfe8ff">
+    github.com/Starland9/xmass_cat
+  </text>
+</svg>

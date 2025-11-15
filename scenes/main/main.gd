@@ -29,7 +29,7 @@ func _add_floor():
 	tile_start_pos.x = f.end_pos.x + randi() % 3
 	tile_start_pos.y  = randi_range(6, 9)
 	
-	tile_size.x = randi() % 10 + 20
+	tile_size.x = randi() % 10 + 2
 	tile_size.y = 12 - tile_start_pos.y
 	cat.jump_factor = 1.7
 	
