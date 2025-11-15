@@ -8,12 +8,10 @@ extends Node2D
 @onready var picked_sound := $PickedSound
 
 var tile_start_pos := Vector2(0, 8)
-var tile_size := Vector2(4, 4)
+var tile_size := Vector2(10, 4)
 var current_floors : Array[Floor] = []
 var current_time := 0
 var collectible_count := 0
-
-
 
 
 func _ready() -> void:
@@ -27,11 +25,11 @@ func _add_floor():
 	var f := tilemap.gen_floor(tile_start_pos, tile_size)
 	current_floors.append(f)
 	tile_start_pos.x = f.end_pos.x + randi() % 3
-	tile_start_pos.y  = randi_range(6, 9)
+	tile_start_pos.y = clampi(tile_start_pos.y + randi_range(-2, 2), 4, 10) 
 	
 	tile_size.x = randi() % 10 + 2
 	tile_size.y = 12 - tile_start_pos.y
-	cat.jump_factor = 1.7
+	cat.jump_factor = 1
 	
 
 func _gen_floor():

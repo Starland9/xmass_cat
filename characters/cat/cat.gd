@@ -13,15 +13,19 @@ enum State {
 
 @onready var anim := $AnimatedSprite2D
 @onready var jump_sound := $Sounds/JumpSound
+@onready var punch_sound := $Sounds/PunchSound
+
+@onready var cat_shape := $CollisionShape2D
 
 const GRAVITY := 9.8   
 
 var _current_state := State.RUN
-var _jump_force := 200
+var _jump_force := 300
 var _run_speed := 100
 
 var jump_factor := 1.0
 var _speed_factor := 1.0
+
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,7 +57,7 @@ func _jump():
 	if is_on_floor():
 		jump_sound.play()
 		velocity.y -= _jump_force * jump_factor
-		_speed_factor += .1
+		_speed_factor += .01
 	
 		
 func _die():
@@ -87,6 +91,16 @@ func _update_anim():
 			
 		State.ATTACK:
 			anim.play("attack")
+			punch_sound.play()
+			
+func die_rotated():
+	var tween := create_tween()
+	tween.tween_property(self, "rotation_degrees", 360, 1)
+	tween.parallel().tween_property(self, "scale", Vector2.ONE * 5, 1)
+	#tween.parallel().tween_property(self, "position", Vector2(position.x + randf_range(-100, 100), -100), 1)
+	
+	tween.tween_callback(die.emit)
+	
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -98,3 +112,19 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
 			_jump()
+		if event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
+			_attack()
+
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+	if body is Chicken:
+		if _current_state == State.ATTACK:
+			body.die()
+		else: die_rotated()
+
+
+func _on_foot_area_body_entered(body: Node2D) -> void:
+	if body is Chicken:
+			velocity.y -= _jump_force * jump_factor * 2
+			punch_sound.play()
+			body.die()

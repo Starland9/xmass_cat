@@ -1,10 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://coi7v6u1ej205"]
+[gd_scene load_steps=40 format=3 uid="uid://coi7v6u1ej205"]
 
 [ext_resource type="Script" uid="uid://bpw00nll7hl8b" path="res://characters/cat/cat.gd" id="1_c6vmg"]
 [ext_resource type="Texture2D" uid="uid://bgoycm4nj5uwi" path="res://assets/images/XmasCatFree/Run.png" id="1_uki7w"]
 [ext_resource type="Texture2D" uid="uid://c35xt4gxcsnfu" path="res://assets/images/XmasCatFree/Attack.png" id="1_xfgbo"]
 [ext_resource type="Texture2D" uid="uid://b58v8oyccbeha" path="res://assets/images/XmasCatFree/Jump.png" id="2_c6vmg"]
 [ext_resource type="AudioStream" uid="uid://pihes7irhsh6" path="res://assets/audio/sfx/jump_short.wav" id="5_uhhm1"]
+[ext_resource type="AudioStream" uid="uid://dlpea1vguy7k1" path="res://assets/audio/sfx/punch.wav" id="6_wudth"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmtou"]
 atlas = ExtResource("1_xfgbo")
@@ -230,18 +231,22 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfgbo"]
 height = 22.000002
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhhm1"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhhm1"]
+size = Vector2(16, 2)
+
 [node name="Cat" type="CharacterBody2D"]
 script = ExtResource("1_c6vmg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_oob0m")
-animation = &"attack"
-frame = 8
-frame_progress = 1.0
+animation = &"jump"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(17, 21)
+position = Vector2(17, 20)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_xfgbo")
 
@@ -252,4 +257,21 @@ stream = ExtResource("5_uhhm1")
 volume_db = 10.0
 pitch_scale = 5.0
 
+[node name="PunchSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_wudth")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(17, 18)
+shape = SubResource("CircleShape2D_uhhm1")
+
+[node name="FootArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FootArea"]
+position = Vector2(17, 31)
+shape = SubResource("RectangleShape2D_uhhm1")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="FootArea" to="." method="_on_foot_area_body_entered"]

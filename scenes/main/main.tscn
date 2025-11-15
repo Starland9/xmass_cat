@@ -52,6 +52,7 @@ editor_draw_drag_margin = true
 
 [node name="BgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_hujxm")
+volume_db = -5.0
 autoplay = true
 
 [node name="GameTimer" type="Timer" parent="."]

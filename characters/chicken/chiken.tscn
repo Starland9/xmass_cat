@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://bj6v8dpmf3mjr"]
+
+[ext_resource type="Texture2D" uid="uid://bxruxa5votj6m" path="res://assets/images/characters/chicken/Chicken_Sprite_Sheet.png" id="1_b83td"]
+[ext_resource type="Script" uid="uid://dky27jbpsexu3" path="res://characters/chicken/chiken.gd" id="1_je7bn"]
+[ext_resource type="AudioStream" uid="uid://bphhd1ndg28ha" path="res://assets/audio/sfx/chicken-430403.mp3" id="3_bb4gd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je7bn"]
+atlas = ExtResource("1_b83td")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb4gd"]
+atlas = ExtResource("1_b83td")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_biqwt"]
+atlas = ExtResource("1_b83td")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ewjf"]
+atlas = ExtResource("1_b83td")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta7yn"]
+atlas = ExtResource("1_b83td")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yio58"]
+atlas = ExtResource("1_b83td")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54di4"]
+atlas = ExtResource("1_b83td")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_csvmo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_je7bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb4gd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_biqwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ewjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta7yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yio58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54di4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b83td"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_je7bn"]
+radius = 242.0
+
+[node name="Chiken" type="CharacterBody2D"]
+script = ExtResource("1_je7bn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_csvmo")
+animation = &"run"
+frame_progress = 0.77606916
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b83td")
+
+[node name="VisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_je7bn")
+
+[node name="Cocot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bb4gd")
+volume_db = 5.0
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]

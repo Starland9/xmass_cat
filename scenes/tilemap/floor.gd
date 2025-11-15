@@ -2,6 +2,7 @@ extends TileMapLayer
 class_name Floor
 
 const collectible_scene = preload("res://objects/collectible/collectible.tscn")
+const enemy_scene = preload("res://characters/chicken/chiken.tscn")
 
 var end_pos : Vector2
 var _start_pos : Vector2
@@ -40,15 +41,23 @@ func generate(start_pos: Vector2, size: Vector2):
 			set_cell(Vector2(x, y), 0, atlas_coord)
 	
 	_add_collectibles()
+	_add_enemies()
 			
 
 func _add_collectibles():
-	for i in range(randi() % 10):
-		var c : Node2D = collectible_scene.instantiate()
+	for i in range(randi() % 5):
+		var c : Collectible = collectible_scene.instantiate()
 		add_child(c)
 		c.position.x = randf_range(global_start_pos().x, global_end_pos().x)
 		c.position.y = global_start_pos().y - 12
 		c.scale *= .6
+		
+func _add_enemies():
+	for i in range(randi() % 5):
+		var c : Chicken = enemy_scene.instantiate()
+		add_child(c)
+		c.position.x = randf_range(global_start_pos().x, global_end_pos().x)
+		c.position.y = global_start_pos().y - 12
 
 func global_end_pos(): return end_pos * Vector2(tile_set.tile_size)
 
