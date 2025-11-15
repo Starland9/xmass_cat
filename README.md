@@ -1,3 +1,5 @@
+![Xmass Cat Banner](docs/media/banner.svg)
+
 # Xmass Cat 🎄🐱
 
 Un jeu de plateforme endless runner mobile développé avec **Godot 4.5** où un chat de Noël court à l'infini en sautant entre des plateformes générées procéduralement.
