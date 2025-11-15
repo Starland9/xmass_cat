@@ -2,6 +2,9 @@
 
 Un jeu de plateforme endless runner mobile développé avec **Godot 4.5** où un chat de Noël court à l'infini en sautant entre des plateformes générées procéduralement.
 
+## Pour proposer/choisir des features, voir la checklist d'idées: [docs/IDEAS.md](docs/IDEAS.md)
+
+
 ## 🎮 Caractéristiques
 
 - **Génération procédurale infinie** - Les plateformes apparaissent dynamiquement devant le joueur
@@ -126,4 +129,3 @@ Projet personnel - Starland9
 
 Pour les développeurs IA et contributeurs, consultez `.github/copilot-instructions.md` pour les détails architecturaux et conventions du projet.
 
-Pour proposer/choisir des features, voir la checklist d'idées: [docs/IDEAS.md](docs/IDEAS.md)
